@@ -6,6 +6,9 @@
 <title>Tribu — Market research powered by a swarm of AI agents</title>
 <meta name="description" content="Real people answer. Up to 140 AI agents analyze. Market research experts train and interpret. Deeper answers, more certainty, in days — with a free pilot to try it on your own question.">
 <link rel="canonical" href="https://tribudata.com/">
+<link rel="alternate" hreflang="en" href="https://tribudata.com/">
+<link rel="alternate" hreflang="es" href="https://tribudata.com/es/">
+<link rel="alternate" hreflang="x-default" href="https://tribudata.com/">
 <meta name="theme-color" content="#0A0F1A">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Tribu">
@@ -907,7 +910,7 @@ body.nonav .minibar{display:flex}
 .minibar .mono{font-size:12px; letter-spacing:.1em; color:var(--text-3)}
 @media (max-width:900px){ .burger{display:inline-flex} }
 .nav-links a.on{color:var(--text);border-bottom:1.5px solid var(--cyan);padding-bottom:3px}
-.lang button{background:none;border:0;color:var(--dim);cursor:pointer;padding:2px;font:inherit} .lang button.on{color:var(--text)} .lang button:hover{color:var(--cyan)}
+.lang button{background:none;border:0;color:var(--dim);cursor:pointer;padding:2px;font:inherit} .lang button.on{color:var(--text)} .lang button:hover{color:var(--cyan)}.lang a{color:var(--dim);text-decoration:none!important;padding:2px}.lang a.on{color:var(--text)}.lang a:hover{color:var(--cyan)}.pg .stack .logos{list-style:none;display:flex;flex-wrap:wrap;gap:8px 22px;padding:0;margin:0 0 18px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3)}
 .mobile-menu a.on{color:var(--cyan)}
 
 .pg .steps-line{display:grid; grid-template-columns:repeat(5,1fr); gap:0; margin-top:16px; border-top:1px solid var(--line)}
@@ -1349,7 +1352,7 @@ a:hover{text-decoration:underline;text-underline-offset:3px}
       <a href="#agent-swarm" data-nav="agent-swarm">Agent Swarm</a><a href="#technology" data-nav="technology">Technology</a><a href="#recruitment" data-nav="recruitment">Recruitment</a><a href="#clients" data-nav="clients">Clients</a><a href="#about" data-nav="about">About</a>
     </nav>
     <div class="nav-right">
-      
+      <span class="lang"><a class="on" href="/" hreflang="en" data-lang="en">EN</a> / <a href="/es/" hreflang="es" data-lang="es">ES</a></span>
       <a class="btn btn-primary" href="#free-pilot">Free pilot</a>
       <button class="burger" id="burger" type="button" aria-label="Menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
     </div>
@@ -1363,7 +1366,7 @@ a:hover{text-decoration:underline;text-underline-offset:3px}
     <li><a href="#clients" data-nav="clients">Clients</a></li>
     <li><a href="#about" data-nav="about">About</a></li>
   </ul>
-  
+  <div class="lang"><a class="on" href="/" hreflang="en" data-lang="en">EN</a><span>/</span><a href="/es/" hreflang="es" data-lang="es">ES</a></div>
 </div>
 <div class="minibar"><div class="wrap"><a class="logo" href="#home"><i></i>tribu</a><span class="mono">TRIBUDATA.COM · FREE PILOT</span></div></div>
 <main id="main">
@@ -3876,5 +3879,6 @@ document.querySelectorAll('a[data-ev],button[data-ev]').forEach(el => el.addEven
   upd();
 })();
 </script>
+<script>document.querySelectorAll('.lang a[data-lang]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();location.href=a.getAttribute('href')+location.hash;}));</script>
 </body>
 </html>

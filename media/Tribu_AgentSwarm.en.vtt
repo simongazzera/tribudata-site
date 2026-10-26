@@ -1,0 +1,137 @@
+WEBVTT
+Kind: captions
+Language: en
+
+NOTE
+Tribu · The Agent Swarm · 2:07
+The video has no narration (music only). These captions carry the on-screen text,
+for accessibility, muted autoplay contexts and search indexing.
+
+intro
+00:00:00.500 --> 00:00:09.800
+How Tribu turns a study into insights
+The agent swarm, step by step
+
+s00-a
+00:00:10.500 --> 00:00:14.000
+// 00 · DATA
+It starts with raw survey data.
+
+s00-b
+00:00:14.000 --> 00:00:18.000
+Code — not judgment — cleans it,
+so every number can be re-run.
+
+s00-c
+00:00:18.000 --> 00:00:21.800
+Raw CSV → clean base, codebook, tables.
+Duplicates and inconsistencies removed.
+
+s01-a
+00:00:22.500 --> 00:00:26.000
+// 01 · ARCHITECT
+An architect agent builds the team.
+
+s01-b
+00:00:26.000 --> 00:00:30.000
+It reads the client's questions and decides
+who runs, and with which techniques.
+
+s01-c
+00:00:30.000 --> 00:00:35.800
+Analysis · control · story · quality:
+140 agents, sized to the study.
+
+s02-a
+00:00:36.000 --> 00:00:40.000
+// 02 · ANALYSIS
+Every key question is attacked several ways.
+
+s02-b
+00:00:40.000 --> 00:00:45.500
+Analysts work in parallel, blind to each other,
+each with a different technique.
+
+s02-c
+00:00:45.500 --> 00:00:52.000
+Explainable ML, choice model, segmentation,
+text analytics — plus techniques found by a scout.
+
+cur-a
+00:00:52.500 --> 00:00:56.500
+// THE CURRENCY
+Agents exchange only one thing: the finding card.
+
+cur-b
+00:00:56.500 --> 00:01:00.500
+No prose travels between agents.
+Every result must arrive in this form.
+
+cur-c
+00:01:00.500 --> 00:01:05.000
+Claim · base · test · script.
+One card = one finding, traceable to its data.
+
+s03-a
+00:01:05.500 --> 00:01:09.500
+// 03 · ARBITER
+An arbiter weighs the techniques against each other.
+
+s03-b
+00:01:09.500 --> 00:01:13.500
+The method that explains most with the data
+available wins — not the fanciest one.
+
+s03-c
+00:01:13.500 --> 00:01:16.300
+They agree → strong finding.
+They disagree → the gap is the insight.
+
+s03-d
+00:01:16.300 --> 00:01:19.000
+Only one sees it → kept with a caveat.
+
+ver-a
+00:01:19.500 --> 00:01:23.500
+// 03 · VERIFY
+Independent agents recompute every number.
+
+ver-b
+00:01:23.500 --> 00:01:28.000
+They never saw the analysis. A devil's advocate
+tests the alternative explanation.
+
+ver-c
+00:01:28.000 --> 00:01:32.500
+Verified · Verified · Rejected.
+Only verified cards can be cited by a slide.
+
+s04-a
+00:01:33.000 --> 00:01:37.000
+// 04 · STORY
+Then the story — with four human approvals.
+
+s04-b
+00:01:37.000 --> 00:01:41.500
+Tribu's strategists sign off at each step
+before the deck exists.
+
+s04-c
+00:01:41.500 --> 00:01:47.000
+1 Conclusion · 2 Slide flow · 3 Design + charts
+4 Full deck — headline = the finding.
+
+why-a
+00:01:47.500 --> 00:01:52.500
+// WHY IT MATTERS
+Up to 140 agents. Several techniques per question.
+
+why-b
+00:01:52.500 --> 00:01:58.800
+Every number traceable.
+Deeper insights — and the judgment stays human.
+
+end
+00:01:59.000 --> 00:02:07.000
+tribu
+Next generation market research

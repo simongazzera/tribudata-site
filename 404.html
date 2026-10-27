@@ -22,6 +22,7 @@
 <meta name="twitter:title" content="Tribu — The rigor of market research experts. The power of an AI swarm.">
 <meta name="twitter:description" content="The discipline of classic market research. The reach of cutting-edge AI. Nothing lost in between. Senior researchers frame your decision and a swarm of up to 140 AI agents tests every angle. Deeper answers in days — try it with a free pilot.">
 <meta name="twitter:image" content="https://tribudata.com/media/poster.jpg">
+<style>.send-fail{margin-top:12px;padding:12px 14px;border:1px solid color-mix(in srgb,var(--amber) 55%,transparent);border-radius:10px;background:color-mix(in srgb,var(--amber) 8%,transparent);font-size:13.5px;line-height:1.5;color:var(--text)}.send-fail b{color:var(--amber)}.send-fail a{color:var(--cyan)}.send-fail .acts{display:flex;gap:8px;margin-top:9px;flex-wrap:wrap}.send-fail .acts button,.send-fail .acts a{font:600 11px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--cyan);background:none;border:1px solid color-mix(in srgb,var(--cyan) 40%,transparent);border-radius:7px;padding:7px 10px;cursor:pointer;text-decoration:none}.send-fail .acts button:hover,.send-fail .acts a:hover{background:color-mix(in srgb,var(--cyan) 10%,transparent)}</style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Tribu", "alternateName": "Tribu Data", "url": "https://tribudata.com/", "logo": "https://tribudata.com/media/logo-512.png", "description": "The discipline of classic market research. The reach of cutting-edge AI. Nothing lost in between. Senior researchers frame your decision and a swarm of up to 140 AI agents tests every angle. Deeper answers in days — try it with a free pilot.", "email": "simon@tribudata.com", "address": {"@type": "PostalAddress", "addressLocality": "Miami", "addressRegion": "FL", "addressCountry": "US"}, "areaServed": ["Latin America", "United States", "United Kingdom", "Europe", "Asia"]}</script>
 <link rel="apple-touch-icon" href="media/logo-512.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230D1323'/%3E%3Crect x='24' y='24' width='30' height='30' fill='%2300718A'/%3E%3Crect x='17' y='17' width='30' height='30' fill='%2300A9C8'/%3E%3Crect x='10' y='10' width='30' height='30' fill='%2300DAFF'/%3E%3C/svg%3E">
@@ -3030,7 +3031,7 @@ $('#askForm').addEventListener('submit',e=>{e.preventDefault(); run($('#q').valu
 document.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>{ $('#q').value=c.textContent; run(c.textContent); }));
 $('#again').addEventListener('click',()=>{ timers.forEach(clearTimeout); phase='idle'; burst=null; hideLabels(); $('#result').classList.remove('on'); $('#chips').style.display=''; $('#steps').classList.remove('on'); $('#q').value=''; $('#q').focus(); });
 $('#emailForm').addEventListener('submit',e=>{e.preventDefault(); const em=$('#em').value.trim(); const q=$('#q').value.trim(); const r=$('#result'); const b=$('#emailForm button'); if(b){ b.disabled=true; b.textContent='Sending…'; }
-  window.__sendPilot({email: em, question: q, name: '', company: '', role: '', country: ''}).then(()=>{ r.innerHTML='<h3>Your question is in.</h3><p>A senior researcher writes back within 1 business day.</p>'; }).catch(()=>{ try{ window.location.href=window.__mailtoFrom({email: em, question: q}); }catch(err){} r.innerHTML='<h3>Almost there.</h3><p>We could not send it automatically. Your email app should open with your question; or write to simon@tribudata.com</p>'; });});
+  window.__sendPilot({email: em, question: q, name: '', company: '', role: '', country: ''}).then(()=>{ r.innerHTML='<h3>Your question is in.</h3><p>A senior researcher writes back within 1 business day.</p>'; }).catch(()=>{ r.innerHTML='<h3>Almost there.</h3><p>We could not send it automatically. Write to <a href="mailto:simon@tribudata.com">simon@tribudata.com</a> or <a href="'+window.__mailtoFrom({email: em, question: q})+'">open your email app</a> with the question already written.</p>'; });});
 ($('#closeForm')||document.createElement('form')).addEventListener('submit',e=>{e.preventDefault(); const v=$('#q2').value; $('#q').value=v; hero.scrollIntoView({behavior:reduce?'auto':'smooth'}); setTimeout(()=>run(v), reduce?0:500);});
 
 addEventListener('resize',()=>{ measure(); if(phase!=='idle'){ groups=groupCenters(); showFor(phase);} });
@@ -3901,6 +3902,10 @@ function mailtoFrom(fields){
   return 'mailto:' + CONTACT + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
 }
 async function sendPilot(fields){
+  try { return await sendPilotOnce(fields); }
+  catch(e){ await new Promise(r => setTimeout(r, 1200)); return sendPilotOnce(fields); }
+}
+async function sendPilotOnce(fields){
   const payload = {
     access_key: FORM_KEY,
     subject: 'Free pilot request' + (fields.company ? ' · ' + fields.company : ''),
@@ -3922,7 +3927,15 @@ function readPilot(form){
   const v = sel => { const el = form.querySelector(sel); return el ? el.value.trim() : ''; };
   return {name: v('input[id$="-name"]'), company: v('input[id$="-company"]'), role: v('input[id$="-role"]'), email: v('input[type="email"]'), country: v('input[id$="-country"]'), question: v('textarea'), _honey: v('input[name="botcheck"]')};
 }
-window.__mailtoFrom = mailtoFrom; window.__sendPilot = sendPilot;
+function pilotText(fields){ return ['Name: ' + (fields.name||''), 'Company: ' + (fields.company||''), 'Role: ' + (fields.role||''), 'Work email: ' + (fields.email||''), 'Country: ' + (fields.country||''), '', 'Question:', fields.question||''].join('\n'); }
+function showSendFail(form, fields){
+  let box = form.querySelector('.send-fail');
+  if (!box){ box = document.createElement('div'); box.className = 'send-fail'; box.setAttribute('role', 'alert'); form.appendChild(box); }
+  box.innerHTML = '<b>We could not send it automatically.</b> <span>Your question is still in the box. Write to <a href="mailto:' + CONTACT + '">' + CONTACT + '</a> or:</span><span class="acts"><button type="button" class="copyq">Copy my question</button><a class="openmail" href="' + mailtoFrom(fields) + '">Open my email app</a></span>';
+  box.querySelector('.copyq').addEventListener('click', () => { const t = pilotText(fields); (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(() => say('Copied')).catch(() => { try { window.prompt('Copy your question:', t); } catch(e){} }); });
+  try { box.scrollIntoView({block: 'nearest', behavior: 'smooth'}); } catch(e){}
+}
+window.__mailtoFrom = mailtoFrom; window.__sendPilot = sendPilot; window.__showSendFail = showSendFail;
 
 /* ---------- forms → thank-you page ---------- */
 document.querySelectorAll('.pilot-form').forEach(form => form.addEventListener('submit', e => {
@@ -3933,9 +3946,10 @@ document.querySelectorAll('.pilot-form').forEach(form => form.addEventListener('
   try { console.log('[analytics] form_submit'); } catch(e){}
   const btn = form.querySelector('button[type=submit]'); const label = btn ? btn.textContent : '';
   if (btn){ btn.disabled = true; btn.textContent = 'Sending…'; }
-  sendPilot(readPilot(form)).then(() => { form.reset(); location.hash = '#thanks'; }).catch(() => {
-    try { window.location.href = mailtoFrom(readPilot(form)); } catch(e){}
-    say('We could not send it automatically. Your email app should open with the question; or write to ' + CONTACT);
+  const fields = readPilot(form);
+  sendPilot(fields).then(() => { const fb = form.querySelector('.send-fail'); if (fb) fb.remove(); form.reset(); location.hash = '#thanks'; }).catch(() => {
+    showSendFail(form, fields);
+    say('We could not send it. Write to ' + CONTACT);
   }).finally(() => { if (btn){ btn.disabled = false; btn.textContent = label; } });
 }));
 document.querySelectorAll('.pilot-form').forEach(form => form.addEventListener('focusin', () => { if (!form.dataset.started){ form.dataset.started='1'; try { console.log('[analytics] form_start'); } catch(e){} } }));
